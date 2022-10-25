@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPR Uptimer</title>
+  <link rel="stylesheet" href="/dist.css">
+  <style>
+    html{scroll-behavior:smooth}
+  </style>
+</head>
+<body>
+  <%- include("./partials/header.ejs") %>
+  <div class="max-w-6xl mx-auto flex flex-col items-center" id="start">
+    <div class="h-20 pt-6 pb-6"></div>
+    <section class="w-full md:w-3/4 px-2 pt-24 md:pt-16">
+      <!-- <span class="bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent"></span> -->
+      <h1 class="text-2xl md:text-3xl font-black text-center">Analytics for <br><%= user %>/<%= repl %></h1>
+      <div class="w-full justify-center items-center font-black mt-8 text-3xl flex gap-2 md:gap-1">
+        <p><%= data.pings %></p>
+        <p class="text-lg font-bold">total pings</p>
+      </div>
+      <div class="w-full justify-center items-center mt-8 flex">
+        <p class="">(Unix Data) Last Ping: <%= data.lastPing %> | Last Update: <%= data.lastUpdate %></p>
+      </div>
+      <div class="w-full flex justify-center mt-12 mb-12">
+        <div class="border border-gray-400 bg-white shadow-2xl">
+          <p class="px-2 pt-2">Responses of the last 12 hours<br>(Updated every 2 hours)</p>
+          <div class="p-2 grid grid-cols-6 justify-center">
+            <% for(i=0;i<data.stats.length;i++) { %>
+              <% var color; if(data.stats[i] == 500) {color="bg-red-500"} else if(data.stats[i] == 0) {color="bg-gray-400"} else {color="bg-green-600"} %>
+              <p class="text-5xl text-transparent mx-[0.125rem] <%= color %>">I</p>
+            <% } %>
+          </div>
+          <p class="px-2 text-green-600">Green - No error</p>
+          <p class="px-2 text-red-600">Red - Error</p>
+          <p class="px-2 pb-2 text-gray-600">Gray - No data (yet)</p>
+        </div>
+      </div>
+
+      <p class="text-gray-500 text-xl text-center mt-16">By using you agree that you accept <a href="/#rules" class="text-gray-600 underline">the rules</a></p>
+    </section>
+  </div>
+</body>
+</html>

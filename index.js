@@ -19,6 +19,21 @@ app.get("/", (req,res) => {
   })
 })
 
+app.get("/@:user/:repl", (req,res) => {
+  try {
+    let data = db.dbdata.ping[req.params.user][req.params.repl]
+    res.render("analytic", {
+      data: data,
+      user: req.params.user,
+      repl: req.params.repl
+    })
+    return
+  } catch(e) {
+    res.redirect("/")
+    return
+  }
+})
+
 app.use(express.static(path.join(__dirname, "public/")))
 
 require("./api")(app)

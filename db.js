@@ -24,7 +24,7 @@ function abbreviate(num,decimals){
 
 
 function getReplData(url) {
-  let clean = filter.clean(url.replace("https://","").replace("/","").replace(".repl.co",""))
+  let clean = filter.clean(url.replace("https://","").split("/")[0].replace(".repl.co",""))
   if (clean.includes("*")) {
     return ["","URL includes profanity or blacklisted words"]
   }
@@ -42,6 +42,15 @@ function getReplData(url) {
     return ["","Malformed URL"]
   }
 }
+
+const stringIsAValidUrl = (s) => {
+  try {
+    new URL(s);
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
 
 function getUnix() {
   return Math.floor(Date.now()/1000)
@@ -116,4 +125,4 @@ setInterval(() => {
 }, 5000)
 
 
-module.exports = { getReplData, dbdata, pingAll, abbreviate, replsPinged, alive, percent }
+module.exports = { getReplData, dbdata, pingAll, abbreviate, replsPinged, alive, percent, stringIsAValidUrl }

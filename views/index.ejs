@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>CPR Uptimer</title>
   <link rel="stylesheet" href="dist.css">
   <style>
     html{scroll-behavior:smooth}
@@ -23,13 +23,16 @@
       <div class="w-full flex justify-center mt-12">
         <div class="w-full lg:w-4/5 px-4 flex flex-col md:flex-row justify-center">
           <div class="w-full md:max-w-none flex align-center items-center shadow-2xl p-4 pl-6 rounded-full bg-white border border-gray-100">
-            <input type="text" id="url" class="bg-transparent text-xl outline-none w-full md:w-3/4 rounded-full" value="" placeholder="https://replname.username.repl.co">
+            <input type="text" id="url" class="bg-transparent text-xl outline-none w-full md:w-3/4 rounded-full" value="" maxlength="80" placeholder="https://replname.username.repl.co">
             <button id="send" class="bg-black text-xl text-white transition duration-20 rounded-full ml-1 p-4 w-full md:w-1/4 hidden md:block active:scale-95">Keep alive</button>
           </div>
           <button id="send" class="bg-black text-xl text-white transition duration-20 rounded-full p-4 w-full mt-4 md:w-1/4 block md:hidden active:scale-95">Keep alive</button>
         </div>
         
         
+      </div>
+      <div class="text-center p-4 mt-6">
+        <p class="text-gray-400" id="out"></p>
       </div>
       <div class="w-full justify-center items-center font-black mt-8 text-3xl flex flex-col md:flex-row gap-2 md:gap-4">
         <div class="flex flex-row md:flex-col gap-2 items-center md:items-start">
@@ -50,20 +53,20 @@
           
         </div>
       </div>
-      <p id="out" class="text-center p-4 mt-6"></p>
+      
 
-      <p class="text-gray-500 text-xl text-center">By using you agree that you understand <a href="#rules" class="text-gray-600 underline">the rules</a></p>
+      <p class="text-gray-500 text-xl text-center mt-16">By using you agree that you accept <a href="/#rules" class="text-gray-600 underline">the rules</a></p>
     </section>
     <section class="w-full md:w-3/4 px-2 pt-24 flex flex-col" id="rules">
       <h2 class="text-4xl md:text-5xl font-black text-center mt-16">Before staying alive <span class="bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent">24/7</span></h2>
-      <div class="flex flex-col justify-center h-full px-4 text-xl mt-16 mb-32">
+      <div class="flex flex-col justify-center h-full px-4 text-xl mt-16 mb-16">
         <ul class="">
           <li class="mb-8">If you notice your repl not getting pinged anymore, please try submitting your repl again.</li>
-          <li class="mb-8">If we can't reach your repl because of a timeout or bad status code for 12 hours, it will automatically be removed from the service (to save resources).</li>
           <li class="mb-8">Your repl must follow <a href="https://replit.com/site/terms" target="_blank" class="text-gray-600 underline">Replit.com's Terms of Service</a> (No cryptominers, proxies, ...)</li>
           <li class="mb-8">Repls that break the rules may be blacklisted from the service and reported to replit moderators.</li>
-          
           <li class="mb-8">Bugs in this service should be reported in the comments <a href="/__repl" target="_blank" class="text-gray-600 underline">here</a></li>
+
+          <li class="mb-8 font-semibold">Beware - Repl and Analytics data is public and can be <a target="_blank" href="/api/getdata" class="text-gray-600 underline">viewed here</a></li>
         </ul>
         
       </div>
@@ -84,9 +87,9 @@
         })
       }).then(res=>res.json()).then(res=>{
         if (res.success) {
-          document.getElementById("out").textContent = "Success! You will be redirected shortly!"
+          document.getElementById("out").innerHTML = "Success! You will be redirected shortly!"
         } else {
-          document.getElementById("out").textContent = "Error: "+res.message
+          document.getElementById("out").innerHTML = "Error: "+res.message
         }
       })
     })
