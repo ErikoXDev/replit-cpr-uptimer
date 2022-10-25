@@ -48,6 +48,7 @@ const stringIsAValidUrl = (s) => {
     new URL(s);
     return true;
   } catch (err) {
+    
     return false;
   }
 };
@@ -74,7 +75,7 @@ async function ping(url, urldata) {
       url: url,
       timeout: 5000
     }).then((res) => {
-      console.log("Pinged " + url)
+      
       dbdata.total++
       urldata.lastPing = getUnix()
       
@@ -90,6 +91,7 @@ async function ping(url, urldata) {
         urldata.stats.shift()
         urldata.stats.push(status)
         urldata.lastUpdate = getUnix()
+        console.log("Updated " + url)
       }
 
       urldata.pings++

@@ -20,13 +20,14 @@
       <h1 class="text-5xl md:text-7xl font-black text-center">The best <span class="bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent">CPR</span> to keep your repls <span class="bg-gradient-to-r from-amber-500 to-pink-500 bg-clip-text text-transparent">alive</span></h1>
       <p class="mt-16 text-gray-500 text-xl text-center">Make your repls stay online, <strong class="text-black">24/7, for free</strong>. Without logging in.</p>
       <p class="text-gray-500 text-xl text-center">Always ready. Analytics. Troubleshooting. One click.</p>
-      <div class="w-full flex justify-center mt-12">
+      <div class="w-full flex flex-col justify-center items-center mt-12">
+        <p class="text-xl">Enter your [user].[repl].repl.co url:</p>
         <div class="w-full lg:w-4/5 px-4 flex flex-col md:flex-row justify-center">
           <div class="w-full md:max-w-none flex align-center items-center shadow-2xl p-4 pl-6 rounded-full bg-white border border-gray-100">
             <input type="text" id="url" class="bg-transparent text-xl outline-none w-full md:w-3/4 rounded-full" value="" maxlength="80" placeholder="https://replname.username.repl.co">
             <button id="send" class="bg-black text-xl text-white transition duration-20 rounded-full ml-1 p-4 w-full md:w-1/4 hidden md:block active:scale-95">Keep alive</button>
           </div>
-          <button id="send" class="bg-black text-xl text-white transition duration-20 rounded-full p-4 w-full mt-4 md:w-1/4 block md:hidden active:scale-95">Keep alive</button>
+          <button id="send2" class="bg-black text-xl text-white transition duration-20 rounded-full p-4 w-full mt-4 md:w-1/4 block md:hidden active:scale-95">Keep alive</button>
         </div>
         
         
@@ -76,6 +77,14 @@
   <%- include("./partials/footer.ejs") %>
   <script>
     document.getElementById("send").addEventListener("click", async function() {
+      doData()
+    })
+    // dumb but it works hehe
+    document.getElementById("send2").addEventListener("click", function() {
+      doData()
+    })
+
+    async function doData() {
       fetch("/api/repl", {
         method:"POST",
         headers: {
@@ -92,7 +101,7 @@
           document.getElementById("out").innerHTML = "Error: "+res.message
         }
       })
-    })
+    }
   </script>
 </body>
 </html>

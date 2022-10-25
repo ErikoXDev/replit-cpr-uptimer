@@ -8,6 +8,7 @@ module.exports = function(app){
     console.log(req.body)
     let action = req.body.action
     let url = req.body.url
+    if (!url.startsWith("https://")) {url+="https://"}
     if (!db.stringIsAValidUrl(url)) {
       res.status(400).json({ success: false, message: "Malformed URL" })
       return
